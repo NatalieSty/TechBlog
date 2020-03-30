@@ -1,0 +1,78 @@
+<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Natalie's Blog</a>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">About </a>
+        
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">GitHub</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">LinkedIn</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Projects</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav> -->
+<header class="blog-header py-3">
+  <div class="row flex-nowrap justify-content-between align-items-center">
+    <div class="col-4 pt-1">
+      <!-- <a *ngIf="loggedIn()" class="text-muted" href="#">New Post</a> -->
+    </div>
+    <div class="col-4 text-center">
+      <a class="blog-header-logo text-dark" [routerLink]="['/blog']" routerLinkActive="router-link-active"  href="#">Natalie's Blog</a>
+    </div>
+    <div class="col-4 d-flex justify-content-end align-items-center">
+      <a class="text-muted" href="#">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg> -->
+      </a>
+      <!-- <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a> -->
+
+      <div *ngIf="!loggedIn()" class="btn-group" dropdown [insideClick]="true">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                aria-controls="dropdown-basic">
+          Login <span class="caret"></span>
+        </button>
+        <form #loginForm="ngForm" id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right p-4"
+            role="menu" aria-labelledby="button-basic" (ngSubmit)="login()">
+            <div class="form-group">
+              <label for="exampleDropdownFormEmail2">Username</label>
+              <input type="email" class="form-control" [(ngModel)]="model.username" name="username" id="username" required placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="exampleDropdownFormPassword2">Password</label>
+              <input type="password" class="form-control" [(ngModel)]="model.password" name="password" id="password" required placeholder="Password">
+            </div>
+            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-sm btn-outline-secondary">Sign in</button>
+        </form>
+      </div>
+
+      
+      <button *ngIf="loggedIn()" id="button-basic" type="button" (click)="logout()" class="btn btn-sm btn-outline-secondary"> Logout</button>
+      
+          
+        
+
+
+    </div>
+  </div>
+</header>
+<div class="nav-scroller py-1 mb-2">
+  <nav class="nav nav-btns d-flex justify-content-between">
+    <a class="p-2 text-muted" [routerLink]="['/about']" routerLinkActive="router-link-active" href="#">About</a>
+    <a class="p-2 text-muted" [routerLink]="['/project']" routerLinkActive="router-link-active" href="#">Projects</a>
+    <a class="p-2 text-muted" href="https://github.com/w3ctag/meetings">GitHub</a>
+    <a class="p-2 text-muted" href="https://github.com/w3ctag/meetings">LinkedIn</a>
+    <a class="p-2 text-muted" href="#">Download Resume</a>
+  </nav>
+</div>

@@ -1,0 +1,6 @@
+.card-text {
+
+    overflow: hidden;
+
+    max-width: 100ch;
+}
