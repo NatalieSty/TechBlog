@@ -26,4 +26,12 @@ getPost(id): Observable<Post>{
   return this.http.get<Post>(this.baseUrl + 'post/' + id);
 }
 
+updatePost(id, post) {
+  return this.http.put(this.baseUrl + 'post/' + id, post, httpOptions);
+}
+
+createPost(post) {
+  return this.http.post(this.baseUrl + 'post/', post, httpOptions);
+}
+
 }

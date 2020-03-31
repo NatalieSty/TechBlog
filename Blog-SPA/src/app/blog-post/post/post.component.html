@@ -1,8 +1,40 @@
-<div class="blog-post">
-  <h2 class="blog-post-title">{{post.title}}</h2>
-  <p class="blog-post-meta">{{post.created}}</p>
+<button *ngIf="loggedIn()" [routerLink]="['/post/edit/', post.id]" routerLinkActive="router-link-active" >Edit</button>
 
-  <div>
-    {{post.content}}
+ <div class="row pl-2 pr-2 mb-2">
+    
+    <div class="blog-post" style="width: 65%; float:left">
+      <h2 class="blog-post-title">{{post.title}}</h2>
+      <p class="blog-post-meta">{{post.created | date}}</p>
+
+      <div>
+        <!-- {{post.content}} -->
+        <div [innerHTML]="post.content"></div>
+
+      </div>
+      
   </div>
-</div>
+  <carousel *ngFor="let photo of galleryImages" style="width: 35%; float:right">
+    <slide>
+      <img src="{{photo.url}}" alt="first slide" style="display: block; width: 100%;">
+    </slide>
+  </carousel>
+
+
+  
+
+  <!-- <ngx-gallery style="width: 30%; float:right" [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery> -->
+  </div>
+
+
+
+
+
+
+  <!-- <div class="blog-post">
+    <h2 class="blog-post-title">{{post.title}}</h2>
+    <p class="blog-post-meta">{{post.created | date}}</p>
+
+    <div>
+      {{post.content}}
+    </div>
+  </div> -->

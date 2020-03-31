@@ -5,3 +5,5 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.ngx-gallery { display: inline-block; margin-bottom: 20px; }

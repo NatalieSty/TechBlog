@@ -1,6 +1,12 @@
 .card-text {
 
     overflow: hidden;
+    
+        
+       word-wrap: break-word;
+    
+}
 
-    max-width: 100ch;
+.card-body {
+    height: 250px;;
 }

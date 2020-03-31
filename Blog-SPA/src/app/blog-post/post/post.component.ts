@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Post } from 'src/app/_models/Post';
 import { PostService } from 'src/app/_services/post.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -10,20 +12,63 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   post: Post;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
 
-  constructor(private postService: PostService, private route: ActivatedRoute) { }
+  constructor(private postService: PostService, private authService: AuthService ,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadPost();
+    this.route.data.subscribe(data => {
+      this.post = data['post'];
+    });
+
+    this.galleryOptions =[
+      {
+        width: '500px',
+        height: '500px',
+        imagePercent: 100,
+        thumbnailsColumns: 3,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        preview: false
+      }
+    ];
+    this.galleryImages = this.getImages();
+
+    console.log(this.galleryImages[0]);
   }
 
-  loadPost() {
-    this.postService.getPost(+this.route.snapshot.params['id'])
-      .subscribe((res: Post) => {
-        this.post = res;
-      }, error => {
-        console.log('error loading post');
+  getImages() {
+    const imageUrls = [];
+    for (const photo of this.post.photos) {
+      imageUrls.push({
+        url: photo.url,
+        
+        description: photo.description
       });
+    }
+
+    // for (const photo of this.post.photos) {
+    //   imageUrls.push({
+    //     small: photo.url,
+    //     medium: photo.url,
+    //     big: photo.url,
+    //     description: photo.description
+    //   });
+    // }
+    return imageUrls;
   }
+
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
+
+  // loadPost() {
+  //   this.postService.getPost(+this.route.snapshot.params['id'])
+  //     .subscribe((res: Post) => {
+  //       this.post = res;
+  //     }, error => {
+  //       console.log('error loading post');
+  //     });
+  // }
 
 }

@@ -62,5 +62,22 @@ namespace Blog.API.Controllers
             throw new Exception("Failed to save post");
         }
 
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePost(int id, PostForUpdateDto postForUpdateDto) {
+
+            var postFromRepo = await _repo.GetPost(id);
+
+            _mapper.Map(postForUpdateDto, postFromRepo);
+
+            if (await _repo.SaveAll()){
+                 return NoContent();
+            }
+
+            throw new Exception($"Updating post {id} failed on save");
+
+        }
+
+
     }
 }

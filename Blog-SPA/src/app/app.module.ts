@@ -5,7 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import {NgxGalleryModule} from '@kolkov/ngx-gallery';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -16,6 +19,12 @@ import { AboutComponent } from './about/about.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { PostDetailResolver } from './_resolvers/post-detail.resolver';
+import { PostEditComponent } from './blog-post/post-edit/post-edit.component';
+import { PostCreateComponent } from './blog-post/post-create/post-create.component';
+import { PostEditResolver } from './_resolvers/post-edit.resolver';
+import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved.guard';
 
 @NgModule({
    declarations: [
@@ -24,19 +33,31 @@ import { appRoutes } from './routes';
       BlogComponent,
       PostComponent,
       AboutComponent,
-      ProjectsComponent
+      ProjectsComponent,
+      PostEditComponent,
+      PostCreateComponent,
+      
+     
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
+      NgxGalleryModule,
       FormsModule,
       RouterModule.forRoot(appRoutes),
-      CommonModule
+      CommonModule,
+      AngularEditorModule,
+      ModalModule.forRoot(),
+      CarouselModule.forRoot(),
    ],
    providers: [
-      AuthService
+      AuthService,
+      PostDetailResolver,
+      PostEditResolver,
+      AuthGuard,
+      PreventUnsavedChanges,
    ],
    bootstrap: [
       AppComponent

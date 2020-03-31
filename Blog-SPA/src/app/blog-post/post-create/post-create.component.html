@@ -1,0 +1,22 @@
+
+ <div>
+
+  <form #createForm="ngForm" (ngSubmit)="createPost()">
+    <div style="width: 70%; float:left">
+      <h4>Post Title</h4>
+      <textarea name="title" rows="1" [(ngModel)]="newPost.title" class="form-control"></textarea>
+      <h4>Post Content</h4>
+      <angular-editor name="content" [(ngModel)]="newPost.content"></angular-editor>
+
+      <!-- <textarea name="content" rows="20" [(ngModel)]="newPost.content" class="form-control"></textarea> -->
+      <button class="btn btn-success mt-3 mb-4" [disabled]="!createForm.dirty">SaveChanges</button>
+   </div>
+   
+  </form>
+   
+
+  <p>photo edit will go here</p>
+ </div>
+
+
+
