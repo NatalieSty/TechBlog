@@ -9,6 +9,10 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { FileUploadModule } from 'ng2-file-upload';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
+
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -25,6 +29,8 @@ import { PostCreateComponent } from './blog-post/post-create/post-create.compone
 import { PostEditResolver } from './_resolvers/post-edit.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved.guard';
+import { PhotoEditorComponent } from './blog-post/photo-editor/photo-editor.component';
+import { PostResolver } from './_resolvers/post.resolver';
 
 @NgModule({
    declarations: [
@@ -36,8 +42,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved.guard';
       ProjectsComponent,
       PostEditComponent,
       PostCreateComponent,
-      
-     
+      PhotoEditorComponent
    ],
    imports: [
       BrowserModule,
@@ -51,11 +56,15 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved.guard';
       AngularEditorModule,
       ModalModule.forRoot(),
       CarouselModule.forRoot(),
+      FileUploadModule,
+      PaginationModule.forRoot()
+
    ],
    providers: [
       AuthService,
       PostDetailResolver,
       PostEditResolver,
+      PostResolver,
       AuthGuard,
       PreventUnsavedChanges,
    ],

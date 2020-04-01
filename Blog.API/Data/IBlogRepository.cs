@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.API.Helpers;
 using Blog.API.Models;
 
 namespace Blog.API.Data
@@ -11,7 +12,10 @@ namespace Blog.API.Data
         Task<bool> SaveAll();
         Task<User> GetUser(int id);
         Task<Post> GetPost(int id);
-        Task<IEnumerable<Post>> GetPosts();
+        Task<PagedList<Post>> GetPosts(PostParams postParams);
+
+        Task<Photo> GetPhoto(int photoId);
+        Task<IEnumerable<Photo>> GetPhotos(int postId);
         
     }
 }

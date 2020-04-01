@@ -3,6 +3,8 @@ import { Post } from 'src/app/_models/Post';
 import { PostService } from 'src/app/_services/post.service';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-blog',
@@ -11,23 +13,44 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class BlogComponent implements OnInit {
   posts: Post[];
+  newPost: any = {};
+  pagination: Pagination;
 
-  constructor(private postServive: PostService, private authService: AuthService) { }
+  constructor(private postService: PostService, private authService: AuthService,
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadPosts();
+    this.route.data.subscribe(data => {
+      this.posts = data['posts'].result;
+      this.pagination = data['posts'].pagination;
+    });
   }
 
   loadPosts() {
-    this.postServive.getPosts().subscribe((res: Post[]) => {
-      this.posts = res;
-    }, error => {
-      console.log('error loading posts');
-    });
+    this.postService.getPosts(this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe((res: PaginatedResult<Post[]>) => {
+        this.posts = res.result;
+        this.pagination = res.pagination;
+     }, error => {
+        console.log('error loading posts');
+      });
   }
 
   loggedIn() {
     return this.authService.loggedIn();
+  }
+
+  createPost() {
+    this.postService.createPost(this.newPost).subscribe((res: Post) => {
+      console.log('post is created');
+      this.router.navigate(['/post/edit/', res.id]);
+    }, error => {
+      console.log(error);
+    });
+  }
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadPosts();
   }
 
 }

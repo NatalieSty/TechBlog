@@ -13,9 +13,11 @@
       </div>
       
   </div>
-  <carousel *ngFor="let photo of galleryImages" style="width: 35%; float:right">
-    <slide>
-      <img src="{{photo.url}}" alt="first slide" style="display: block; width: 100%;">
+
+
+  <carousel style="width: 35%; float:right">
+    <slide *ngFor="let photo of postPhotos">
+      <img src="{{photo.url}}" style="display: block; width: 100%;">
     </slide>
   </carousel>
 

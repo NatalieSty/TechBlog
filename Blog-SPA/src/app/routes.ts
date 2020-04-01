@@ -8,9 +8,10 @@ import { PostEditComponent } from './blog-post/post-edit/post-edit.component';
 import { PostCreateComponent } from './blog-post/post-create/post-create.component';
 import { PostEditResolver } from './_resolvers/post-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved.guard';
+import { PostResolver } from './_resolvers/post.resolver';
 
 export const appRoutes: Routes = [
-    { path: 'blog', component: BlogComponent},
+    { path: 'blog', component: BlogComponent, resolve: {posts: PostResolver}},
     { path: 'about', component: AboutComponent},
     { path: 'post/new', component: PostCreateComponent},
     { path: 'post/:id', component: PostComponent, resolve: {post: PostDetailResolver}},

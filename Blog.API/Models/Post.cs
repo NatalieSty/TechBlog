@@ -10,5 +10,6 @@ namespace Blog.API.Models
          public DateTime Created { get; set; }
          public string Content { get; set; }
          public ICollection<Photo> Photos { get; set; }
+         public bool IsVisible { get; set; }
     }
 }

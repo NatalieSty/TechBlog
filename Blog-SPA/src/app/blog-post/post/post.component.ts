@@ -4,6 +4,7 @@ import { PostService } from 'src/app/_services/post.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Photo } from 'src/app/_models/Photo';
 
 @Component({
   selector: 'app-post',
@@ -12,6 +13,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class PostComponent implements OnInit {
   post: Post;
+  postPhotos: Photo[];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
@@ -21,8 +23,8 @@ export class PostComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.post = data['post'];
     });
-
-    this.galleryOptions =[
+    this.postPhotos = this.post.photos;
+    this.galleryOptions = [
       {
         width: '500px',
         height: '500px',
@@ -34,7 +36,6 @@ export class PostComponent implements OnInit {
     ];
     this.galleryImages = this.getImages();
 
-    console.log(this.galleryImages[0]);
   }
 
   getImages() {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Post } from 'src/app/_models/Post';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PostService } from 'src/app/_services/post.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -68,7 +68,7 @@ export class PostEditComponent implements OnInit {
     ]
 };
 
-  constructor(private route: ActivatedRoute, private postService: PostService) { }
+  constructor(private route: ActivatedRoute, private postService: PostService, private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
@@ -80,9 +80,11 @@ export class PostEditComponent implements OnInit {
     this.postService.updatePost(this.post.id, this.post).subscribe(next => {
       console.log('Post updated successfully');
       this.editForm.reset(this.post);
+      this.router.navigate(['/post/', this.post.id]);
     }, error => {
       console.log(error);
     });
   }
+  
 
 }

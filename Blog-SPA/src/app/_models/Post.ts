@@ -6,4 +6,5 @@ export interface Post {
     content: string;
     created: Date;
     photos?: Photo[];
+    isVisible: boolean;
 }

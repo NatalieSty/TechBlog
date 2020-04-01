@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blog.API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Blog.API.Helpers;
 
 namespace Blog.API.Data
 {
@@ -23,16 +25,30 @@ namespace Blog.API.Data
             _context.Remove(entity);
         }
 
+        public Task<Photo> GetPhoto(int photoId)
+        {
+            var photo = _context.Photos.FirstOrDefaultAsync(p => p.Id ==  photoId);
+            return photo;
+        }
+
+        public async Task<IEnumerable<Photo>> GetPhotos(int postId)
+        {
+            var photos = await _context.Photos.Where(p => p.PostId == postId).ToListAsync();
+            
+            return photos;
+        }
+
         public async Task<Post> GetPost(int id)
         {
             var post = await _context.Posts.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Id == id);
             return post;
         }
 
-        public async Task<IEnumerable<Post>> GetPosts()
+        public async Task<PagedList<Post>> GetPosts(PostParams postParams)
         {
-            var posts = await _context.Posts.Include(p => p.Photos).ToListAsync();
-            return posts;
+            var posts = _context.Posts.Where(p => p.IsVisible == true).Include(p => p.Photos).OrderByDescending(p => p.Created);
+
+            return await PagedList<Post>.CreateAsync(posts, postParams.PageNumber, postParams.PageSize);
         }
 
         public Task<User> GetUser(int id)
