@@ -51,6 +51,18 @@ namespace Blog.API.Data
             return await PagedList<Post>.CreateAsync(posts, postParams.PageNumber, postParams.PageSize);
         }
 
+        public async Task<IEnumerable<Project>> GetProjects()
+        {
+            var projects = await _context.Projects.OrderByDescending(p => p.Id).ToListAsync();
+            return projects;
+        }
+
+        public Task<Project> GetProject(int id)
+        {
+            var project = _context.Projects.FirstOrDefaultAsync(p => p.Id == id);
+            return project;
+        }
+
         public Task<User> GetUser(int id)
         {
             var user = _context.Users.FirstOrDefaultAsync(u => u.Id == id);

@@ -1,4 +1,6 @@
 <button *ngIf="loggedIn()" [routerLink]="['/post/edit/', post.id]" routerLinkActive="router-link-active" >Edit</button>
+<button *ngIf="loggedIn()" (click)="deletePost(post.id)" >Delete</button>
+
 
  <div class="row pl-2 pr-2 mb-2">
     

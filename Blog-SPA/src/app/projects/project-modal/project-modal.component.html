@@ -1,0 +1,16 @@
+
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">{{project.title}}</h4>
+      </div>
+
+
+      <div class="modal-body" style="width:100%;">
+        <div class="text-content">
+          <p>{{project.description}}<p>
+          <p>Created In: {{project.created}}</p>
+        </div>
+      
+            <div [innerHTML]="project.context"></div>
+        </div>
+     
+ 

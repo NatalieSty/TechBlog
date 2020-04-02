@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from 'src/app/_models/Post';
 import { PostService } from 'src/app/_services/post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Photo } from 'src/app/_models/Photo';
@@ -17,7 +17,8 @@ export class PostComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  constructor(private postService: PostService, private authService: AuthService ,private route: ActivatedRoute) { }
+  constructor(private postService: PostService, private authService: AuthService ,
+    private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -36,6 +37,13 @@ export class PostComponent implements OnInit {
     ];
     this.galleryImages = this.getImages();
 
+  }
+
+  deletePost(postId) {
+    this.postService.deletePost(postId).subscribe(() => {
+      this.router.navigate(['/blog']);
+
+    })
   }
 
   getImages() {

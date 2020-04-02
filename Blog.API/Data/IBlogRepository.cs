@@ -16,6 +16,7 @@ namespace Blog.API.Data
 
         Task<Photo> GetPhoto(int photoId);
         Task<IEnumerable<Photo>> GetPhotos(int postId);
-        
+        Task<IEnumerable<Project>> GetProjects();
+        Task<Project> GetProject(int id);
     }
 }

@@ -1,0 +1,30 @@
+
+ <div>
+  <!-- <button *ngIf="loggedIn()" [routerLink]="['/post/edit/', post.id]" routerLinkActive="router-link-active" >Edit</button> -->
+   
+  <form #createForm="ngForm" (ngSubmit)="createProject()">
+    <div >
+      <h4>Title</h4>
+      <textarea name="title" rows="1" [(ngModel)]="newProject.title" class="form-control"></textarea>
+      <h4>Category</h4>
+      <textarea name="category" rows="1" [(ngModel)]="newProject.category" class="form-control"></textarea>
+      <h4>Skills</h4>
+      <textarea name="skills" rows="1" [(ngModel)]="newProject.skills" class="form-control"></textarea>
+      <h4>Intro</h4>
+      <textarea name="intro" rows="1" [(ngModel)]="newProject.intro" class="form-control"></textarea>
+      <h4>Description</h4>
+      <textarea name="description" rows="1" [(ngModel)]="newProject.description" class="form-control"></textarea>
+      <h4>Created</h4>
+      <textarea name="created" rows="1" [(ngModel)]="newProject.created" class="form-control"></textarea>
+      <h4>Url</h4>
+      <textarea name="url" rows="1" [(ngModel)]="newProject.url" class="form-control"></textarea>
+
+      <h4>Project Content</h4>
+      <angular-editor name="context" [(ngModel)]="newProject.context"></angular-editor>
+
+      <button class="btn btn-success mt-3 mb-4" [disabled]="!createForm.dirty">SaveChanges</button>
+   </div>
+   
+  </form>
+
+ </div>

@@ -6,7 +6,7 @@ import { AuthGuard } from 'src/app/_guards/auth.guard';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Post } from 'src/app/_models/Post';
 import { PostService } from 'src/app/_services/post.service';
-import { findIndex } from 'rxjs/operators';
+import { findIndex, debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,9 +31,12 @@ export class PhotoEditorComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
   }
 
-  deletePhoto(id) {
+  deletePhoto(id: number) {
+    // debugger;
     this.postService.deletePhoto(this.postId, id).subscribe(() => {
       this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
+    }, error => {
+      console.log(error);
     });
   }
 
@@ -52,7 +55,7 @@ export class PhotoEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
-        const res = JSON.parse(response);
+        const res: Photo = JSON.parse(response);
         const photo = {
           id: res.id,
           url: res.url,

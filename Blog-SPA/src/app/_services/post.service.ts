@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Post } from '../_models/Post';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
+import { Project } from '../_models/Project';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -54,6 +55,30 @@ createPost(post) {
 
 deletePhoto(postId, photoId) {
   return this.http.delete(this.baseUrl + 'post/' + postId + '/photo/' + photoId, httpOptions);
+}
+
+deletePost(id) {
+  return this.http.delete(this.baseUrl + 'post/' + id, httpOptions);
+}
+
+getProjects() {
+  return this.http.get(this.baseUrl + 'project/');
+}
+
+getProject(id) :Observable<Project> {
+  return this.http.get<Project>(this.baseUrl + 'project/' + id);
+}
+
+createProject(project) {
+  return this.http.post(this.baseUrl + 'project/', project, httpOptions);
+}
+
+editProject(id, project) {
+  return this.http.put(this.baseUrl + 'project/' + id, project, httpOptions);
+}
+
+deleteProject(id) {
+  return this.http.delete(this.baseUrl + 'project/' + id, httpOptions);
 }
 
 }

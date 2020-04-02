@@ -111,7 +111,7 @@ namespace Blog.API.Controllers
             }
 
             if(await _repo.SaveAll()) {
-                return Ok("Deleted photo");
+                return Ok();
             }
 
             return BadRequest("failed to delete photo");

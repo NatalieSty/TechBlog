@@ -73,7 +73,7 @@ namespace Blog.API.Controllers
                 return CreatedAtRoute("GetPost", new { id = post.Id }, postToReturn);
             }
 
-            throw new Exception("Failed to save post");
+            return BadRequest("Failed to save post");
         }
 
         [Authorize]
@@ -93,6 +93,24 @@ namespace Blog.API.Controllers
 
             throw new Exception($"Updating post {id} failed on save");
 
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            var post = await _repo.GetPost(id);
+
+            if( post == null){
+                return BadRequest("Cannot find post");
+            }
+            
+            _repo.Delete(post);
+
+            if (await _repo.SaveAll()){
+                return Ok();
+            }
+
+            return BadRequest("Failed to delete post");
         }
 
 

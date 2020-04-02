@@ -14,6 +14,7 @@ namespace Blog.API.Helpers
             CreateMap<Photo, PhotosForDetailedDto>();
             CreateMap<PostForUpdateDto, Post>();
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<ProjectForCreationDto, Project>();
         }
     }
 }

@@ -31,6 +31,11 @@ import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved.guard';
 import { PhotoEditorComponent } from './blog-post/photo-editor/photo-editor.component';
 import { PostResolver } from './_resolvers/post.resolver';
+import { ProjectResolver } from './_resolvers/project.resolver';
+import { ProjectModalComponent } from './projects/project-modal/project-modal.component';
+import { ProjectCreateComponent } from './projects/project-create/project-create.component';
+import { ProjectEditComponent } from './projects/project-edit/project-edit.component';
+import { ProjectEditResolver } from './_resolvers/project-edit.resolver';
 
 @NgModule({
    declarations: [
@@ -42,7 +47,9 @@ import { PostResolver } from './_resolvers/post.resolver';
       ProjectsComponent,
       PostEditComponent,
       PostCreateComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      ProjectCreateComponent,
+      ProjectEditComponent
    ],
    imports: [
       BrowserModule,
@@ -67,6 +74,8 @@ import { PostResolver } from './_resolvers/post.resolver';
       PostResolver,
       AuthGuard,
       PreventUnsavedChanges,
+      ProjectResolver,
+      ProjectEditResolver
    ],
    bootstrap: [
       AppComponent
